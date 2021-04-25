@@ -1,0 +1,55 @@
+## 雪橇保持小哈图表信息 ##
+DROP TABLE IF EXISTS txiaoha_chart;
+CREATE TABLE txiaoha_chart(
+	Fchart_id BIGINT UNSIGNED NOT NULL,
+	Fxiaoha_obj_id VARCHAR(64) NOT NULL DEFAULT "",
+	Fchart_name VARCHAR(128) NOT NULL DEFAULT "",
+	Fshare_key VARCHAR(64) NOT NULL DEFAULT "",
+	Fparent_folder_id BIGINT UNSIGNED NOT NULL,
+	Ftags VARCHAR(256) NOT NULL DEFAULT "",
+	Fchart_type SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+	Fchart_state SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+	Fcommodity_name VARCHAR(32) NOT NULL DEFAULT "",
+	Fplate BIGINT UNSIGNED NOT NULL DEFAULT 0,
+	Fcreate_timestamp BIGINT UNSIGNED NOT NULL DEFAULT 0,
+	Flast_modify_timestamp BIGINT UNSIGNED NOT NULL DEFAULT 0,
+	PRIMARY KEY(Fchart_id),
+	UNIQUE KEY(Fxiaoha_obj_id)
+) CHARSET=utf8mb4, ENGINE=InnoDb;
+
+## 雪橇保持小哈图表的文件夹信息 ##
+DROP TABLE IF EXISTS txiaoha_chart_folder;
+CREATE TABLE txiaoha_chart_folder(
+	Ffolder_id BIGINT UNSIGNED NOT NULL,
+	Fxiaoha_obj_id VARCHAR(64) NOT NULL DEFAULT "",
+	Ffolder_name VARCHAR(128) NOT NULL DEFAULT "",
+	Fparent_folder_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
+	Fchild_folder_ids VARCHAR(512) NOT NULL DEFAULT "",
+	Ftags VARCHAR(256) NOT NULL DEFAULT "",
+	Fcreate_timestamp BIGINT UNSIGNED NOT NULL DEFAULT 0,
+	Flast_modify_timestamp BIGINT UNSIGNED NOT NULL DEFAULT 0,
+	PRIMARY KEY(Ffolder_id),
+	UNIQUE KEY(Fxiaoha_obj_id)
+) CHARSET=utf8mb4, ENGINE=InnoDb;
+
+## 雪橇图表的标记信息 ##
+DROP TABLE IF EXISTS txueqiao_tag;
+CREATE TABLE txueqiao_tag(
+	Ftag_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	Fcn_name VARCHAR(64) NOT NULL DEFAULT "",
+	Fcreate_timestamp BIGINT UNSIGNED NOT NULL DEFAULT 0,
+	Flast_modify_timestamp BIGINT UNSIGNED NOT NULL DEFAULT 0,
+	PRIMARY KEY(Ftag_id),
+	UNIQUE KEY(Fcn_name)
+) CHARSET=utf8mb4, ENGINE=InnoDb, AUTO_INCREMENT=1;
+
+## 雪橇图表的板块信息 ##
+DROP TABLE IF EXISTS txueqiao_plate;
+CREATE TABLE txueqiao_plate(
+	Fplate_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	Fcn_name VARCHAR(64) NOT NULL DEFAULT "",
+	Fcreate_timestamp BIGINT UNSIGNED NOT NULL DEFAULT 0,
+	Flast_modify_timestamp BIGINT UNSIGNED NOT NULL DEFAULT 0,
+	PRIMARY KEY(Fplate_id),
+	UNIQUE KEY(Fcn_name)
+) CHARSET=utf8mb4, ENGINE=InnoDb, AUTO_INCREMENT=1;
